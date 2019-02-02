@@ -82,6 +82,8 @@
   * a macro key is pressed.
   */
 
+#include "Kaleidoscope-CapsLock.h"
+
 enum { MACRO_VERSION_INFO,
        MACRO_ANY
      };
@@ -489,7 +491,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // comfortable - or able - to do automatically, but can be useful
   // nevertheless. Such as toggling the key report protocol between Boot (used
   // by BIOSes) and Report (NKRO).
-  USBQuirks
+  USBQuirks,
+  CapsLock
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
@@ -527,6 +530,10 @@ void setup() {
   // one wants to use these layers, just set the default layer to one in EEPROM,
   // by using the `settings.defaultLayer` Focus command.
   EEPROMKeymap.setup(5, EEPROMKeymap.Mode::EXTEND);
+
+  // Customize CapsLock plugin
+  CapsLock.color = CRGB(160, 0, 0);
+  CapsLock.highlightShiftKeys = 0;
 }
 
 /** loop is the second of the standard Arduino sketch functions.
@@ -537,5 +544,5 @@ void setup() {
   */
 
 void loop() {
-  Kaleidoscope.loop();
+  Kaleidoscope.loop();  
 }
